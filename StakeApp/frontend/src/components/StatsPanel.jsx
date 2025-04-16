@@ -6,9 +6,7 @@ import { CONTRACT_ADDRESSES } from "../config";
 
 const StatsPanel = ({ connectedAddress }) => {
   const [stats, setStats] = useState({
-    totalValueLocked: "N/A",
     apy: "0",
-    totalRewards: "N/A",
     userStake: "0",
     userRewards: "0",
   });
@@ -57,9 +55,7 @@ const StatsPanel = ({ connectedAddress }) => {
       const apy = (adjustedRewardRate * secondsPerYear * 100).toFixed(2);
 
       setStats({
-        totalValueLocked: "N/A", // Requires off-chain or events
         apy,
-        totalRewards: "N/A", // Requires BarcaCoin Transfer events
         userStake: Number(userStakeEth).toFixed(2),
         userRewards: Number(userRewardsBarca).toFixed(2),
       });
@@ -90,17 +86,10 @@ const StatsPanel = ({ connectedAddress }) => {
       ) : (
         <div className="grid grid-cols-2 gap-4">
           <div className="bg-gray-700 p-4 rounded-lg">
-            <p className="text-gray-400 text-sm">Total Value Locked</p>
-            <p className="text-xl font-bold">{stats.totalValueLocked}</p>
-          </div>
-          <div className="bg-gray-700 p-4 rounded-lg">
             <p className="text-gray-400 text-sm">APY</p>
             <p className="text-xl font-bold text-green-400">{stats.apy}%</p>
           </div>
-          <div className="bg-gray-700 p-4 rounded-lg">
-            <p className="text-gray-400 text-sm">Total Rewards Distributed</p>
-            <p className="text-xl font-bold">{stats.totalRewards}</p>
-          </div>
+
           <div className="bg-gray-700 p-4 rounded-lg">
             <p className="text-gray-400 text-sm">Your Stake</p>
             <p className="text-xl font-bold">{stats.userStake} ETH</p>
