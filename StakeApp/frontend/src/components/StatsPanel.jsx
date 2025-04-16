@@ -27,8 +27,10 @@ const StatsPanel = ({ connectedAddress }) => {
         setError("");
 
         // Initialize provider and contract
-        const provider = new ethers.BrowserProvider(window.ethereum);
+        const provider = new ethers.BrowserProvider(window.ethereum); // Ensure provider is initialized ,provider here is = window.ethereum
+        //windows.ethereum gives access to the Ethereum provider injected by MetaMask
         const stakingContract = getContract(
+          // getContract is a function that creates a new instance of the contract
           CONTRACT_ADDRESSES.stakingContract,
           stakingAbi,
           provider
