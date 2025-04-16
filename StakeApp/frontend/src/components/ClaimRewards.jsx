@@ -1,14 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { connectWallet, getContract } from "../utils/web3";
 import stakingAbi from "../abis/StakingContract.json";
 import { CONTRACT_ADDRESSES } from "../config";
 
+
 const ClaimRewards = () => {
-  const [isClaiming, setIsClaiming] = React.useState(false);
+  const [isClaiming, setIsClaiming] = useState(false);
+  const [error, setError] = useState("");
 
   const handleClaim = async () => {
     try {
+      if (!window.ethereum || !window.ethereum.selectedAddress) {
+        setError("Please connect your wallet first");
+        return;
+      }
+
       setIsClaiming(true);
+      setError("");
+
       const signer = await connectWallet();
       const stakingContract = await getContract(
         CONTRACT_ADDRESSES.stakingContract,
@@ -21,7 +30,9 @@ const ClaimRewards = () => {
       alert("Rewards claimed successfully!");
     } catch (error) {
       console.error("Claim error:", error);
-      alert("Error claiming rewards. Check console for details.");
+      setError(
+        error.message || "Error claiming rewards. Check console for details."
+      );
     } finally {
       setIsClaiming(false);
     }
@@ -34,6 +45,8 @@ const ClaimRewards = () => {
           Claim Rewards
         </h2>
         <p className="text-gray-400 mb-6">Claim your earned BARCA tokens</p>
+
+        {error && <div className="mb-4 text-red-400 text-sm">{error}</div>}
 
         <button
           onClick={handleClaim}

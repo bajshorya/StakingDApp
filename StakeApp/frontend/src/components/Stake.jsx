@@ -7,15 +7,23 @@ import { CONTRACT_ADDRESSES } from "../config";
 const Stake = () => {
   const [amount, setAmount] = useState("");
   const [isStaking, setIsStaking] = useState(false);
+  const [error, setError] = useState("");
 
   const handleStake = async () => {
     try {
+      if (!window.ethereum || !window.ethereum.selectedAddress) {
+        setError("Please connect your wallet first");
+        return;
+      }
+
       if (!amount || isNaN(amount) || Number(amount) <= 0) {
-        alert("Please enter a valid amount of ETH to stake.");
+        setError("Please enter a valid amount of ETH to stake.");
         return;
       }
 
       setIsStaking(true);
+      setError("");
+
       const signer = await connectWallet();
       const stakingContract = await getContract(
         CONTRACT_ADDRESSES.stakingContract,
@@ -31,7 +39,7 @@ const Stake = () => {
       setAmount("");
     } catch (error) {
       console.error("Staking error:", error);
-      alert("Error staking. Check console for details.");
+      setError(error.message || "Error staking. Check console for details.");
     } finally {
       setIsStaking(false);
     }
@@ -54,6 +62,8 @@ const Stake = () => {
             className="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
           />
         </div>
+
+        {error && <div className="mb-4 text-red-400 text-sm">{error}</div>}
 
         <button
           onClick={handleStake}

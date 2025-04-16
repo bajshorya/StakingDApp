@@ -1,21 +1,25 @@
-import { ethers } from "ethers";
+import { ethers } from "ethers"; // Add this import
 
 export const connectWallet = async () => {
-  if (window.ethereum) {
-    try {
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      await window.ethereum.request({ method: "eth_requestAccounts" });
-      const signer = await provider.getSigner();
-      return signer;
-    } catch (error) {
-      console.error("Error connecting to MetaMask:", error);
-      throw error;
+  try {
+    if (!window.ethereum) {
+      throw new Error("No Ethereum provider found. Please install MetaMask!");
     }
-  } else {
-    throw new Error("MetaMask is not installed");
+
+    const accounts = await window.ethereum.request({
+      method: "eth_requestAccounts",
+    });
+
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    const signer = await provider.getSigner();
+
+    return signer;
+  } catch (error) {
+    console.error("Error connecting wallet:", error);
+    throw error;
   }
 };
 
-export const getContract = async (address, abi, signer) => {
+export const getContract = (address, abi, signer) => {
   return new ethers.Contract(address, abi, signer);
 };

@@ -7,15 +7,23 @@ import { CONTRACT_ADDRESSES } from "../config";
 const Unstake = () => {
   const [amount, setAmount] = useState("");
   const [isUnstaking, setIsUnstaking] = useState(false);
+  const [error, setError] = useState("");
 
   const handleUnstake = async () => {
     try {
+      if (!window.ethereum || !window.ethereum.selectedAddress) {
+        setError("Please connect your wallet first");
+        return;
+      }
+
       if (!amount || isNaN(amount) || Number(amount) <= 0) {
-        alert("Please enter a valid amount of ETH to unstake.");
+        setError("Please enter a valid amount of ETH to unstake.");
         return;
       }
 
       setIsUnstaking(true);
+      setError("");
+
       const signer = await connectWallet();
       const stakingContract = await getContract(
         CONTRACT_ADDRESSES.stakingContract,
@@ -29,7 +37,7 @@ const Unstake = () => {
       setAmount("");
     } catch (error) {
       console.error("Unstaking error:", error);
-      alert("Error unstaking. Check console for details.");
+      setError(error.message || "Error unstaking. Check console for details.");
     } finally {
       setIsUnstaking(false);
     }
@@ -50,6 +58,8 @@ const Unstake = () => {
             className="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
           />
         </div>
+
+        {error && <div className="mb-4 text-red-400 text-sm">{error}</div>}
 
         <button
           onClick={handleUnstake}
