@@ -19,16 +19,20 @@ function App() {
         <header className="flex flex-col items-center mb-16">
           <div className="flex items-center justify-between w-full mb-6">
             <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-green-500 flex items-center justify-center transform hover:scale-110 transition-transform duration-300">
-                <span className="text-2xl">⚡</span>
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-green-500 p-1 flex items-center justify-center transform hover:scale-110 transition-transform duration-300">
+                <img
+                  src="/FC_Barcelona_(crest).svg"
+                  alt="FC Barcelona Logo"
+                  className="w-full h-full object-contain"
+                />
               </div>
-              <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-purple-400 via-pink-500 to-green-400 bg-clip-text text-transparent tracking-tight">
+              <h1 className="text-4xl sm:text-5xl font-semibold text-purple-400 tracking-tight">
                 BARCA Staking
               </h1>
             </div>
             <WalletConnection onAddressChanged={setConnectedAddress} />
           </div>
-          <p className="text-gray-300 text-lg max-w-2xl text-center leading-relaxed">
+          <p className="text-gray-300 text-base leading-relaxed max-w-2xl text-center">
             Stake ETH, earn BARCA, and unlock the power of DeFi.
           </p>
         </header>
@@ -46,17 +50,17 @@ function App() {
           </main>
         ) : (
           <div className="text-center py-20 glass-card rounded-xl">
-            <h2 className="text-3xl font-bold text-purple-400 mb-4 tracking-tight">
+            <h2 className="text-3xl font-semibold text-purple-400 mb-4 tracking-tight">
               Start Staking Today
             </h2>
-            <p className="text-gray-300 mb-8 max-w-md mx-auto">
+            <p className="text-gray-300 text-base mb-8 max-w-md mx-auto">
               Connect your wallet to stake ETH and earn BARCA rewards.
             </p>
             <button
               onClick={() =>
                 document.querySelector(".connect-wallet-btn")?.click()
               }
-              className="px-6 py-3 bg-purple-600 rounded-lg font-medium text-white hover:bg-purple-700 transition-all shadow-lg hover:shadow-purple-500/50"
+              className="px-6 py-3 bg-purple-600 rounded-lg font-medium text-white text-sm hover:bg-purple-700 transition-all shadow-lg hover:shadow-purple-500/50"
             >
               Connect Wallet
             </button>
@@ -70,7 +74,7 @@ function App() {
               <a
                 key={link}
                 href="#"
-                className="hover:text-purple-400 transition-colors duration-200"
+                className="hover:text-purple-400 transition-colors duration-200 text-sm"
               >
                 {link}
               </a>
