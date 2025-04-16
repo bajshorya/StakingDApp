@@ -15,63 +15,67 @@ const StatsPanel = ({ connectedAddress }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    const fetchStats = async () => {
-      if (!connectedAddress) {
-        setLoading(false);
-        return;
-      }
+  const fetchStats = async () => {
+    if (!connectedAddress) {
+      setLoading(false);
+      return;
+    }
 
+    try {
+      setLoading(true);
+      setError("");
+
+      // Initialize provider and contract
+      const provider = new ethers.BrowserProvider(window.ethereum);
+      const stakingContract = getContract(
+        CONTRACT_ADDRESSES.stakingContract,
+        stakingAbi,
+        provider
+      );
+
+      // Fetch protocol stats
+      const rewardRate = await stakingContract.rewardRate(); // Public variable
+
+      // Fetch user-specific stats
+      let userStake;
       try {
-        setLoading(true);
-        setError("");
-
-        // Initialize provider and contract
-        const provider = new ethers.BrowserProvider(window.ethereum); // Ensure provider is initialized ,provider here is = window.ethereum
-        //windows.ethereum gives access to the Ethereum provider injected by MetaMask
-        const stakingContract = getContract(
-          // getContract is a function that creates a new instance of the contract
-          CONTRACT_ADDRESSES.stakingContract,
-          stakingAbi,
-          provider
-        );
-
-        // Fetch protocol stats
-        const rewardRate = await stakingContract.rewardRate(); // Public variable access
-
-        // Fetch user-specific stats
-        const userStake = await stakingContract.balanceOf(connectedAddress);
-        const userRewards = await stakingContract.getReward(connectedAddress);
-
-        // Format values
-        const userStakeEth = ethers.formatEther(userStake);
-        const userRewardsBarca = ethers.formatUnits(userRewards, 18); // Assuming BARCA has 18 decimals
-
-        // Calculate APY
-        // rewardRate = 1e18 BARCA per second per ETH = 1 BARCA/sec/ETH
-        // APY = (rewardRate * secondsPerYear * BARCA_price / ETH_price) * 100
-        const secondsPerYear = 31536000;
-        const apy = (
-          (Number(ethers.formatUnits(rewardRate, 18)) * secondsPerYear) /
-          1
-        ).toFixed(2); // Simplified, assuming BARCA ≈ ETH price
-
-        setStats({
-          totalValueLocked: "N/A", // Replace with off-chain data if available
-          apy,
-          totalRewards: "N/A", // Replace with event-based or off-chain data
-          userStake: Number(userStakeEth).toFixed(2),
-          userRewards: Number(userRewardsBarca).toFixed(2),
-        });
-      } catch (err) {
-        console.error("Error fetching stats:", err);
-        setError("Failed to load stats. Please try again.");
-      } finally {
-        setLoading(false);
+        userStake = await stakingContract.balanceOf(connectedAddress);
+      } catch {
+        userStake = ethers.toBigInt(0); // Fallback if call fails
       }
-    };
+      const userRewards = await stakingContract.getReward(connectedAddress);
 
+      // Format values
+      const userStakeEth = ethers.formatEther(userStake);
+      const userRewardsBarca = ethers.formatUnits(userRewards, 18); // Assuming BARCA has 18 decimals
+
+      // Calculate APY
+      // rewardRate = 1e18 BARCA/sec/ETH (too high); scale down for display
+      const secondsPerYear = 31536000;
+      const adjustedRewardRate =
+        Number(ethers.formatUnits(rewardRate, 18)) / 1e4; // e.g., 0.0001 BARCA/sec
+      const apy = (adjustedRewardRate * secondsPerYear * 100).toFixed(2);
+
+      setStats({
+        totalValueLocked: "N/A", // Requires off-chain or events
+        apy,
+        totalRewards: "N/A", // Requires BarcaCoin Transfer events
+        userStake: Number(userStakeEth).toFixed(2),
+        userRewards: Number(userRewardsBarca).toFixed(2),
+      });
+    } catch (err) {
+      console.error("Error fetching stats:", err);
+      setError("Failed to load stats. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     fetchStats();
+    // Auto-refresh stats every 30 seconds
+    const interval = setInterval(fetchStats, 30000);
+    return () => clearInterval(interval);
   }, [connectedAddress]);
 
   return (
