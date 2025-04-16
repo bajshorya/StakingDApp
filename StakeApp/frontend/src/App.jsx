@@ -9,77 +9,72 @@ function App() {
   const [connectedAddress, setConnectedAddress] = useState("");
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-6">
-      {/* Animated gradient background */}
-      <div className="fixed inset-0 overflow-hidden opacity-20">
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-gray-900 to-green-900 animate-gradient"></div>
-      </div>
+    <div className="min-h-screen bg-black font-sans relative overflow-hidden">
+      {/* Animated background */}
+      <div className="fixed inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-800 animate-gradient opacity-60"></div>
+      <div className="fixed inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4zKSIvPjwvc3ZnPg==')] bg-repeat opacity-10 animate-pulse"></div>
 
-      <div className="relative z-10 max-w-6xl mx-auto">
-        {/* Header with logo and title */}
-        <header className="flex flex-col items-center mb-12">
-          <div className="flex items-center justify-between w-full mb-4">
-            <div className="flex items-center">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-600 to-green-500 flex items-center justify-center mr-4">
-                <span className="text-3xl">⚡</span>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Header */}
+        <header className="flex flex-col items-center mb-16">
+          <div className="flex items-center justify-between w-full mb-6">
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-green-500 flex items-center justify-center transform hover:scale-110 transition-transform duration-300">
+                <span className="text-2xl">⚡</span>
               </div>
-              <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-400 via-pink-500 to-green-400 bg-clip-text text-transparent">
-                BARCA Staking DApp
+              <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-purple-400 via-pink-500 to-green-400 bg-clip-text text-transparent tracking-tight">
+                BARCA Staking
               </h1>
             </div>
             <WalletConnection onAddressChanged={setConnectedAddress} />
           </div>
-          <p className="text-gray-400 text-lg max-w-2xl text-center">
-            Stake your ETH, earn BARCA rewards, and unlock the power of
-            decentralized finance
+          <p className="text-gray-300 text-lg max-w-2xl text-center leading-relaxed">
+            Stake ETH, earn BARCA, and unlock the power of DeFi.
           </p>
         </header>
 
         {connectedAddress ? (
           <main className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Stake/Unstake section */}
             <div className="space-y-8">
               <Stake />
               <Unstake />
             </div>
-
-            {/* Claim rewards section */}
-            <div className="flex flex-col">
+            <div className="space-y-8">
               <ClaimRewards />
-              {/* Stats panel */}
               <StatsPanel connectedAddress={connectedAddress} />
             </div>
           </main>
         ) : (
-          <div className="text-center py-16">
-            <h2 className="text-2xl font-bold text-purple-400 mb-4">
-              Connect your wallet to get started
+          <div className="text-center py-20 glass-card rounded-xl">
+            <h2 className="text-3xl font-bold text-purple-400 mb-4 tracking-tight">
+              Start Staking Today
             </h2>
-            <p className="text-gray-400 mb-6">
-              Please connect your Ethereum wallet to stake, unstake, or claim
-              rewards
+            <p className="text-gray-300 mb-8 max-w-md mx-auto">
+              Connect your wallet to stake ETH and earn BARCA rewards.
             </p>
+            <button
+              onClick={() =>
+                document.querySelector(".connect-wallet-btn")?.click()
+              }
+              className="px-6 py-3 bg-purple-600 rounded-lg font-medium text-white hover:bg-purple-700 transition-all shadow-lg hover:shadow-purple-500/50"
+            >
+              Connect Wallet
+            </button>
           </div>
         )}
 
-        {/* Footer */}
-        <footer className="mt-16 text-center text-gray-500 text-sm">
-          <p>
-            Powered by Ethereum • Secure smart contracts • Decentralized finance
-          </p>
-          <div className="flex justify-center space-x-4 mt-2">
-            <a href="#" className="hover:text-purple-400 transition">
-              Docs
-            </a>
-            <a href="#" className="hover:text-purple-400 transition">
-              Twitter
-            </a>
-            <a href="#" className="hover:text-purple-400 transition">
-              Discord
-            </a>
-            <a href="#" className="hover:text-purple-400 transition">
-              GitHub
-            </a>
+        <footer className="mt-20 text-center text-gray-400 text-sm">
+          <p className="mb-4">Powered by Ethereum • Built for DeFi</p>
+          <div className="flex justify-center space-x-6">
+            {["Docs", "Twitter", "Discord", "GitHub"].map((link) => (
+              <a
+                key={link}
+                href="#"
+                className="hover:text-purple-400 transition-colors duration-200"
+              >
+                {link}
+              </a>
+            ))}
           </div>
         </footer>
       </div>

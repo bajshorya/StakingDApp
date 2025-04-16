@@ -3,7 +3,6 @@ import { connectWallet, getContract } from "../utils/web3";
 import stakingAbi from "../abis/StakingContract.json";
 import { CONTRACT_ADDRESSES } from "../config";
 
-
 const ClaimRewards = () => {
   const [isClaiming, setIsClaiming] = useState(false);
   const [error, setError] = useState("");
@@ -39,25 +38,26 @@ const ClaimRewards = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto bg-gray-800 rounded-xl shadow-lg overflow-hidden p-6 border border-gray-700">
+    <div className="glass-card rounded-xl p-6 shadow-lg hover:shadow-green-500/20 transition-all duration-300">
       <div className="text-center">
-        <h2 className="text-2xl font-bold text-green-400 mb-2">
+        <h2 className="text-2xl font-semibold text-green-300 mb-3 tracking-tight">
           Claim Rewards
         </h2>
-        <p className="text-gray-400 mb-6">Claim your earned BARCA tokens</p>
+        <p className="text-gray-400 mb-6 text-sm">
+          Claim your earned BARCA tokens
+        </p>
 
         {error && <div className="mb-4 text-red-400 text-sm">{error}</div>}
 
         <button
           onClick={handleClaim}
           disabled={isClaiming}
-          className={`w-full py-3 px-4 rounded-lg font-medium text-white transition-all 
+          className={`w-full py-3 px-4 rounded-lg font-medium text-white transition-all duration-300 
             ${
               isClaiming
-                ? "bg-green-700 cursor-not-allowed"
-                : "bg-green-600 hover:bg-green-700 shadow-md hover:shadow-lg"
-            }
-            focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-800`}
+                ? "bg-green-800/50 cursor-not-allowed"
+                : "bg-green-600 hover:bg-green-700 shadow-md hover:shadow-lg hover:shadow-green-500/50"
+            }`}
         >
           {isClaiming ? (
             <span className="flex items-center justify-center">
@@ -74,12 +74,12 @@ const ClaimRewards = () => {
                   r="10"
                   stroke="currentColor"
                   strokeWidth="4"
-                ></circle>
+                />
                 <path
                   className="opacity-75"
                   fill="currentColor"
                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                ></path>
+                />
               </svg>
               Claiming...
             </span>

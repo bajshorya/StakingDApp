@@ -81,10 +81,10 @@ const WalletConnection = ({ onAddressChanged }) => {
   return (
     <div className="flex items-center">
       {account ? (
-        <div className="flex items-center space-x-2">
-          <div className="flex items-center bg-gray-700 rounded-full px-4 py-2">
-            <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
-            <span className="text-sm font-mono">
+        <div className="flex items-center space-x-3">
+          <div className="flex items-center bg-gray-800/50 backdrop-blur-sm rounded-full px-4 py-2 border border-gray-700/50">
+            <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
+            <span className="text-sm font-mono text-gray-200">
               {`${account.substring(0, 6)}...${account.substring(
                 account.length - 4
               )}`}
@@ -92,7 +92,7 @@ const WalletConnection = ({ onAddressChanged }) => {
           </div>
           <button
             onClick={disconnectWallet}
-            className="px-3 py-1 text-sm rounded-full bg-gray-600 hover:bg-gray-500 transition"
+            className="px-3 py-1 text-sm rounded-lg bg-gray-700/50 text-gray-300 hover:bg-gray-600/50 border border-gray-600/50 transition-all duration-200"
           >
             Disconnect
           </button>
@@ -101,11 +101,12 @@ const WalletConnection = ({ onAddressChanged }) => {
         <button
           onClick={connectWallet}
           disabled={isConnecting}
-          className={`px-4 py-2 rounded-full font-medium text-white transition-all ${
-            isConnecting
-              ? "bg-purple-700 cursor-not-allowed"
-              : "bg-purple-600 hover:bg-purple-700"
-          }`}
+          className={`connect-wallet-btn px-5 py-2 rounded-lg font-medium text-white transition-all duration-300 
+            ${
+              isConnecting
+                ? "bg-purple-800/50 cursor-not-allowed"
+                : "bg-purple-600 hover:bg-purple-700 shadow-md hover:shadow-lg hover:shadow-purple-500/50"
+            }`}
         >
           {isConnecting ? "Connecting..." : "Connect Wallet"}
         </button>

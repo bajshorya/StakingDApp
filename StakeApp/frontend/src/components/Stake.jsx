@@ -46,10 +46,12 @@ const Stake = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto bg-gray-800 rounded-xl shadow-lg overflow-hidden p-6 border border-gray-700">
+    <div className="glass-card rounded-xl p-6 shadow-lg hover:shadow-purple-500/20 transition-all duration-300">
       <div className="text-center">
-        <h2 className="text-2xl font-bold text-purple-400 mb-2">Stake ETH</h2>
-        <p className="text-gray-400 mb-6">
+        <h2 className="text-2xl font-semibold text-purple-300 mb-3 tracking-tight">
+          Stake ETH
+        </h2>
+        <p className="text-gray-400 mb-6 text-sm">
           Lock your ETH to earn BARCA rewards
         </p>
 
@@ -59,7 +61,7 @@ const Stake = () => {
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
             placeholder="Amount in ETH"
-            className="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="w-full px-4 py-3 rounded-lg bg-gray-800/50 border border-gray-600/50 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-200"
           />
         </div>
 
@@ -68,13 +70,12 @@ const Stake = () => {
         <button
           onClick={handleStake}
           disabled={isStaking}
-          className={`w-full py-3 px-4 rounded-lg font-medium text-white transition-all 
+          className={`w-full py-3 px-4 rounded-lg font-medium text-white transition-all duration-300 
             ${
               isStaking
-                ? "bg-purple-700 cursor-not-allowed"
-                : "bg-purple-600 hover:bg-purple-700 shadow-md hover:shadow-lg"
-            }
-            focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-800`}
+                ? "bg-purple-800/50 cursor-not-allowed"
+                : "bg-purple-600 hover:bg-purple-700 shadow-md hover:shadow-lg hover:shadow-purple-500/50"
+            }`}
         >
           {isStaking ? (
             <span className="flex items-center justify-center">
@@ -91,12 +92,12 @@ const Stake = () => {
                   r="10"
                   stroke="currentColor"
                   strokeWidth="4"
-                ></circle>
+                />
                 <path
                   className="opacity-75"
                   fill="currentColor"
                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                ></path>
+                />
               </svg>
               Staking...
             </span>
