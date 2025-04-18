@@ -35,7 +35,7 @@ function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 font-sans relative overflow-hidden">
+    <div className="min-h-screen w-full bg-gradient-to-br from-gray-900 via-black to-gray-800 font-sans relative overflow-hidden">
       {/* Grid background */}
       <div className="fixed inset-0 bg-grid-white/[0.02]"></div>
 
@@ -91,7 +91,7 @@ function App() {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                   </span>
-                  Ethereum Mainnet
+                  Ethereum Testnet (Sepolia)
                 </div>
               </div>
             </motion.div>

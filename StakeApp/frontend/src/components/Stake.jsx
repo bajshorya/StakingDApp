@@ -8,6 +8,7 @@ const Stake = () => {
   const [amount, setAmount] = useState("");
   const [isStaking, setIsStaking] = useState(false);
   const [error, setError] = useState("");
+  const [inputFocused, setInputFocused] = useState(false);
 
   const handleStake = async () => {
     try {
@@ -46,37 +47,90 @@ const Stake = () => {
   };
 
   return (
-    <div className="glass-card rounded-xl p-6 shadow-lg hover:shadow-purple-500/20 transition-all duration-300">
-      <div className="text-center">
-        <h2 className="text-2xl font-semibold text-purple-300 mb-3 tracking-tight">
-          Stake ETH
-        </h2>
+    <div className="glass-card rounded-xl p-6 shadow-lg hover:shadow-purple-500/30 transition-all duration-500 relative overflow-hidden group">
+      {/* Animated gradient border effect */}
+      <div className="absolute inset-0 bg-gradient-to-r from-purple-600/30 via-blue-500/30 to-purple-600/30 opacity-0 group-hover:opacity-100 animate-gradient rounded-xl -z-10"></div>
+
+      {/* Floating particles effect */}
+      <div className="absolute inset-0 overflow-hidden opacity-30">
+        {[...Array(5)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 rounded-full bg-purple-400"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              animation: `float-${i} ${3 + i}s ease-in-out infinite`,
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="text-center relative z-10">
+        <div className="flex items-center justify-center mb-3">
+          <div className="w-8 h-8 bg-purple-500/20 rounded-full flex items-center justify-center mr-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-4 h-4 text-purple-300"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 4.5v15m7.5-7.5h-15"
+              />
+            </svg>
+          </div>
+          <h2 className="text-2xl font-semibold text-purple-300 tracking-tight">
+            Stake ETH
+          </h2>
+        </div>
         <p className="text-gray-400 mb-6 text-sm">
           Lock your ETH to earn BARCA rewards
         </p>
 
-        <div className="mb-4">
-          <input
-            type="number"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            placeholder="Amount in ETH"
-            className="w-full px-4 py-3 rounded-lg bg-gray-800/50 border border-gray-600/50 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-200"
-          />
+        <div className="mb-6 relative">
+          <div
+            className={`absolute inset-0 rounded-lg bg-gradient-to-r from-purple-500/50 to-blue-500/50 blur ${
+              inputFocused ? "opacity-50" : "opacity-0"
+            } transition-opacity duration-300`}
+          ></div>
+          <div className="relative">
+            <input
+              type="number"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              onFocus={() => setInputFocused(true)}
+              onBlur={() => setInputFocused(false)}
+              placeholder="Amount in ETH"
+              className="w-full px-4 py-3 rounded-lg bg-gray-800/80 border border-gray-600/50 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300"
+            />
+            <div className="absolute right-3 top-3 text-gray-500">ETH</div>
+          </div>
         </div>
 
-        {error && <div className="mb-4 text-red-400 text-sm">{error}</div>}
+        {error && (
+          <div className="mb-4 text-red-400 text-sm bg-red-900/20 py-2 px-3 rounded-lg border border-red-800/50 animate-pulse">
+            {error}
+          </div>
+        )}
 
         <button
           onClick={handleStake}
           disabled={isStaking}
-          className={`w-full py-3 px-4 rounded-lg font-medium text-white transition-all duration-300 
+          className={`w-full py-3 px-4 rounded-lg font-medium text-white transition-all duration-300 relative overflow-hidden
             ${
               isStaking
                 ? "bg-purple-800/50 cursor-not-allowed"
-                : "bg-purple-600 hover:bg-purple-700 shadow-md hover:shadow-lg hover:shadow-purple-500/50"
+                : "bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 shadow-md hover:shadow-lg hover:shadow-purple-500/50"
             }`}
         >
+          {/* Button shine effect */}
+          <span className="absolute top-0 left-0 w-full h-full bg-white/20 transform -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
+
           {isStaking ? (
             <span className="flex items-center justify-center">
               <svg

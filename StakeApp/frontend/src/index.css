@@ -59,5 +59,7 @@
   }
 }
 #root {
-  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12;
+  @apply min-h-screen; /* Make root take full viewport height */
 }
+
+/* Remove the max-w-7xl and padding from #root as they're already in your App component */

@@ -3,11 +3,11 @@ import { ethers } from "ethers";
 import { connectWallet, getContract } from "../utils/web3";
 import stakingAbi from "../abis/StakingContract.json";
 import { CONTRACT_ADDRESSES } from "../config";
-
 const Unstake = () => {
   const [amount, setAmount] = useState("");
   const [isUnstaking, setIsUnstaking] = useState(false);
   const [error, setError] = useState("");
+  const [inputFocused, setInputFocused] = useState(false);
 
   const handleUnstake = async () => {
     try {
@@ -44,35 +44,88 @@ const Unstake = () => {
   };
 
   return (
-    <div className="glass-card rounded-xl p-6 shadow-lg hover:shadow-red-500/20 transition-all duration-300">
-      <div className="text-center">
-        <h2 className="text-2xl font-semibold text-red-300 mb-3 tracking-tight">
-          Unstake ETH
-        </h2>
+    <div className="glass-card rounded-xl p-6 shadow-lg hover:shadow-red-500/30 transition-all duration-500 relative overflow-hidden group">
+      {/* Animated gradient border effect */}
+      <div className="absolute inset-0 bg-gradient-to-r from-red-600/30 via-yellow-500/30 to-red-600/30 opacity-0 group-hover:opacity-100 animate-gradient rounded-xl -z-10"></div>
+
+      {/* Floating particles effect */}
+      <div className="absolute inset-0 overflow-hidden opacity-30">
+        {[...Array(5)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 rounded-full bg-red-400"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              animation: `float-${i} ${3 + i}s ease-in-out infinite`,
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="text-center relative z-10">
+        <div className="flex items-center justify-center mb-3">
+          <div className="w-8 h-8 bg-red-500/20 rounded-full flex items-center justify-center mr-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-4 h-4 text-red-300"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M19.5 12h-15"
+              />
+            </svg>
+          </div>
+          <h2 className="text-2xl font-semibold text-red-300 tracking-tight">
+            Unstake ETH
+          </h2>
+        </div>
         <p className="text-gray-400 mb-6 text-sm">Withdraw your staked ETH</p>
 
-        <div className="mb-4">
-          <input
-            type="number"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            placeholder="Amount in ETH"
-            className="w-full px-4 py-3 rounded-lg bg-gray-800/50 border border-gray-600/50 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all duration-200"
-          />
+        <div className="mb-6 relative">
+          <div
+            className={`absolute inset-0 rounded-lg bg-gradient-to-r from-red-500/50 to-yellow-500/50 blur ${
+              inputFocused ? "opacity-50" : "opacity-0"
+            } transition-opacity duration-300`}
+          ></div>
+          <div className="relative">
+            <input
+              type="number"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              onFocus={() => setInputFocused(true)}
+              onBlur={() => setInputFocused(false)}
+              placeholder="Amount in ETH"
+              className="w-full px-4 py-3 rounded-lg bg-gray-800/80 border border-gray-600/50 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all duration-300"
+            />
+            <div className="absolute right-3 top-3 text-gray-500">ETH</div>
+          </div>
         </div>
 
-        {error && <div className="mb-4 text-red-400 text-sm">{error}</div>}
+        {error && (
+          <div className="mb-4 text-red-400 text-sm bg-red-900/20 py-2 px-3 rounded-lg border border-red-800/50 animate-pulse">
+            {error}
+          </div>
+        )}
 
         <button
           onClick={handleUnstake}
           disabled={isUnstaking}
-          className={`w-full py-3 px-4 rounded-lg font-medium text-white transition-all duration-300 
+          className={`w-full py-3 px-4 rounded-lg font-medium text-white transition-all duration-300 relative overflow-hidden
             ${
               isUnstaking
                 ? "bg-red-800/50 cursor-not-allowed"
-                : "bg-red-600 hover:bg-red-700 shadow-md hover:shadow-lg hover:shadow-red-500/50"
+                : "bg-gradient-to-r from-red-600 to-yellow-600 hover:from-red-700 hover:to-yellow-700 shadow-md hover:shadow-lg hover:shadow-red-500/50"
             }`}
         >
+          {/* Button shine effect */}
+          <span className="absolute top-0 left-0 w-full h-full bg-white/20 transform -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
+
           {isUnstaking ? (
             <span className="flex items-center justify-center">
               <svg
