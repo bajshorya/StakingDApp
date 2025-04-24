@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { connectWallet, getContract } from "../utils/web3";
 import stakingAbi from "../abis/StakingContract.json";
 import { CONTRACT_ADDRESSES } from "../config";
+import SuccessDialog from "./SuccessDialog";
+
 const ClaimRewards = () => {
   const [isClaiming, setIsClaiming] = useState(false);
   const [error, setError] = useState("");
   const [isHovering, setIsHovering] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleClaim = async () => {
     try {
@@ -26,7 +29,7 @@ const ClaimRewards = () => {
 
       const tx = await stakingContract.claimRewards();
       await tx.wait();
-      alert("Rewards claimed successfully!");
+      setShowSuccess(true);
     } catch (error) {
       console.error("Claim error:", error);
       setError(
@@ -136,7 +139,7 @@ const ClaimRewards = () => {
               Claiming...
             </span>
           ) : (
-            <span className="flex items-center justify-center">
+            <span className="flex items-center justify-center hover:cursor-pointer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -164,6 +167,13 @@ const ClaimRewards = () => {
         <div className="mt-4 text-sm text-gray-400">
           <p>Your rewards will be transferred to your wallet</p>
         </div>
+
+        <SuccessDialog
+          isOpen={showSuccess}
+          onClose={() => setShowSuccess(false)}
+          message="Rewards claimed successfully!"
+          color="green-500"
+        />
       </div>
     </div>
   );

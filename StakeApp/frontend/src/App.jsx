@@ -6,6 +6,7 @@ import WalletConnection from "./components/WalletConnection";
 import StatsPanel from "./components/StatsPanel";
 import { FlipWords } from "../src/components/ui/flip-words";
 import { motion } from "framer-motion";
+import { FaTwitter, FaGithub, FaBook } from "react-icons/fa";
 
 function App() {
   const [connectedAddress, setConnectedAddress] = useState("");
@@ -34,16 +35,19 @@ function App() {
     },
   ];
 
+  const socialLinks = [
+    { name: "Docs", icon: <FaBook />, url: "#" },
+    { name: "Twitter", icon: <FaTwitter />, url: "#" },
+    { name: "GitHub", icon: <FaGithub />, url: "#" },
+  ];
+
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-gray-900 via-black to-gray-800 font-sans relative overflow-hidden">
-      {/* Grid background */}
       <div className="fixed inset-0 bg-grid-white/[0.02]"></div>
 
-      {/* Animated dots background */}
       <div className="fixed inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=')] opacity-20"></div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Header */}
         <header className="mb-12">
           <div className="flex flex-col md:flex-row items-center justify-between mb-8">
             <motion.div
@@ -85,20 +89,19 @@ function App() {
               <p className="text-gray-300 text-xl">
                 A decentralized staking protocol built on Ethereum
               </p>
-              <div className="mt-6 flex justify-center">
+              <div className="mt-6 flex justify-center font-bold">
                 <div className="flex items-center text-sm text-gray-400">
                   <span className="flex h-2 w-2 relative mr-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                   </span>
-                  Ethereum Testnet (Sepolia)
+                  Currently Operating on Ethereum Testnet (Sepolia)
                 </div>
               </div>
             </motion.div>
           </div>
         </header>
 
-        {/* Features Grid */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -120,7 +123,6 @@ function App() {
           ))}
         </motion.div>
 
-        {/* Main Content */}
         {connectedAddress ? (
           <motion.main
             initial={{ opacity: 0 }}
@@ -165,68 +167,117 @@ function App() {
           </motion.div>
         )}
 
-        {/* Blockchain Stats */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="bg-gray-900/50 rounded-xl p-6 mb-16 border border-gray-800"
-        >
-          <h3 className="text-xl font-semibold text-white mb-4">
-            Protocol Stats
-          </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-black/50 p-4 rounded-lg border border-gray-800">
-              <div className="text-gray-400 text-sm">Total Value Locked</div>
-              <div className="text-2xl font-bold text-purple-400">$42.8M</div>
-            </div>
-            <div className="bg-black/50 p-4 rounded-lg border border-gray-800">
-              <div className="text-gray-400 text-sm">Total Stakers</div>
-              <div className="text-2xl font-bold text-green-400">12,492</div>
-            </div>
-            <div className="bg-black/50 p-4 rounded-lg border border-gray-800">
-              <div className="text-gray-400 text-sm">APY</div>
-              <div className="text-2xl font-bold text-white">8.24%</div>
-            </div>
-            <div className="bg-black/50 p-4 rounded-lg border border-gray-800">
-              <div className="text-gray-400 text-sm">BARCA Price</div>
-              <div className="text-2xl font-bold text-white">$0.42</div>
-            </div>
-          </div>
-        </motion.div>
+        <div className="relative w-full h-32 mb-8 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-500/30 via-blue-500/30 to-green-500/30 animate-wave opacity-50"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-500/50 via-blue-500/50 to-green-500/50 animate-wave-delayed opacity-30"></div>
+        </div>
 
-        {/* Footer */}
-        <footer className="mt-16 text-center text-gray-500 text-sm">
-          <div className="flex flex-col md:flex-row justify-between items-center mb-6">
-            <div className="flex items-center justify-center md:justify-start mb-4 md:mb-0">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-green-500 p-1 flex items-center justify-center mr-3">
-                <img
-                  src="/FC_Barcelona_(crest).svg"
-                  alt="FC Barcelona Logo"
-                  className="w-full h-full object-contain"
+        <footer className="mt-16 text-center text-gray-500 text-sm relative">
+          <div className="glass-card backdrop-blur-md bg-gray-900/30 border border-gray-800 rounded-xl p-6 mb-6">
+            <div className="absolute inset-0 overflow-hidden opacity-20">
+              {[...Array(5)].map((_, i) => (
+                <div
+                  key={i}
+                  className="absolute w-1 h-1 rounded-full bg-purple-400"
+                  style={{
+                    top: `${Math.random() * 100}%`,
+                    left: `${Math.random() * 100}%`,
+                    animation: `float-${i} ${3 + i}s ease-in-out infinite`,
+                  }}
                 />
-              </div>
-              <span className="text-white">BARCA STAKE</span>
-            </div>
-            <div className="flex space-x-6">
-              {["Docs", "Twitter", "Discord", "GitHub"].map((link) => (
-                <a
-                  key={link}
-                  href="#"
-                  className="hover:text-purple-400 transition-colors duration-200"
-                >
-                  {link}
-                </a>
               ))}
             </div>
+
+            <div className="flex flex-col md:flex-row justify-between items-center mb-6 relative z-10">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="flex items-center justify-center md:justify-start mb-4 md:mb-0 group"
+              >
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-green-500 p-1 flex items-center justify-center mr-3 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-purple-500/50">
+                  <img
+                    src="/FC_Barcelona_(crest).svg"
+                    alt="FC Barcelona Logo"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <span className="text-white font-semibold transition-all duration-300 group-hover:text-purple-400">
+                  BARCA STAKE
+                </span>
+              </motion.div>
+              <div className="flex space-x-6">
+                {socialLinks.map((link, index) => (
+                  <motion.a
+                    key={index}
+                    href={link.url}
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="relative text-gray-400 hover:text-purple-400 transition-colors duration-200 group text-xl"
+                    aria-label={link.name}
+                  >
+                    {link.icon}
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                  </motion.a>
+                ))}
+              </div>
+            </div>
+            <p className="mb-4 text-gray-300 relative z-10">
+              Powered by Ethereum • Built for DeFi
+            </p>
+            <p className="text-xs text-gray-600 relative z-10">
+              By connecting your wallet, you agree to our Terms of Service and
+              Privacy Policy
+            </p>
           </div>
-          <p className="mb-4">Powered by Ethereum • Built for DeFi</p>
-          <p className="text-xs text-gray-600">
-            By connecting your wallet, you agree to our Terms of Service and
-            Privacy Policy
-          </p>
         </footer>
       </div>
+
+      <style>
+        {`
+          @keyframes wave {
+            0% {
+              transform: translateX(-100%);
+            }
+            100% {
+              transform: translateX(100%);
+            }
+          }
+          @keyframes wave-delayed {
+            0% {
+              transform: translateX(-100%);
+            }
+            100% {
+              transform: translateX(100%);
+            }
+          }
+          @keyframes float-0 {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+          }
+          @keyframes float-1 {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+          }
+          @keyframes float-2 {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+          }
+          @keyframes float-3 {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+          }
+          @keyframes float-4 {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+          }
+          .animate-wave {
+            animation: wave 6s linear infinite;
+          }
+          .animate-wave-delayed {
+            animation: wave-delayed 6s linear infinite;
+            animation-delay: 2s;
+          }
+        `}
+      </style>
     </div>
   );
 }

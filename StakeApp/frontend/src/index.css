@@ -61,5 +61,186 @@
 #root {
   @apply min-h-screen; /* Make root take full viewport height */
 }
+@layer utilities {
+  /* Existing animations */
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  @keyframes float-0 {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  @keyframes float-1 {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-25px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  @keyframes float-2 {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  @keyframes float-3 {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-30px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  @keyframes float-4 {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-18px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  @keyframes float-5 {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-22px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  @keyframes float-6 {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-28px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  @keyframes float-7 {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-16px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  @keyframes float-8 {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-24px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  @keyframes float-9 {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
 
+  /* New animations */
+  @keyframes scale-in {
+    0% {
+      transform: scale(0.5);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  @keyframes pulse-slow {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  .animate-scale-in {
+    animation: scale-in 0.3s ease-out;
+  }
+  .animate-pulse {
+    animation: pulse 1.5s infinite;
+  }
+  .animate-pulse-slow {
+    animation: pulse-slow 2s infinite;
+  }
+  .text-glow {
+    text-shadow: 0 0 10px [color], 0 0 20px [color], 0 0 30px [color];
+    animation: glow-pulse 1.5s infinite alternate;
+  }
+  @keyframes glow-pulse {
+    from {
+      text-shadow: 0 0 5px [color], 0 0 10px [color], 0 0 15px [color];
+    }
+    to {
+      text-shadow: 0 0 10px [color], 0 0 20px [color], 0 0 30px [color];
+    }
+  }
+  .bg-gradient-radial {
+    background: radial-gradient(circle, transparent 0%, black 70%);
+  }
+}
 /* Remove the max-w-7xl and padding from #root as they're already in your App component */

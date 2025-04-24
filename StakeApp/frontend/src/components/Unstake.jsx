@@ -3,11 +3,14 @@ import { ethers } from "ethers";
 import { connectWallet, getContract } from "../utils/web3";
 import stakingAbi from "../abis/StakingContract.json";
 import { CONTRACT_ADDRESSES } from "../config";
+import SuccessDialog from "./SuccessDialog";
+
 const Unstake = () => {
   const [amount, setAmount] = useState("");
   const [isUnstaking, setIsUnstaking] = useState(false);
   const [error, setError] = useState("");
   const [inputFocused, setInputFocused] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleUnstake = async () => {
     try {
@@ -33,7 +36,7 @@ const Unstake = () => {
 
       const tx = await stakingContract.unstake(ethers.parseEther(amount));
       await tx.wait();
-      alert("Unstaked successfully!");
+      setShowSuccess(true);
       setAmount("");
     } catch (error) {
       console.error("Unstaking error:", error);
@@ -116,7 +119,7 @@ const Unstake = () => {
         <button
           onClick={handleUnstake}
           disabled={isUnstaking}
-          className={`w-full py-3 px-4 rounded-lg font-medium text-white transition-all duration-300 relative overflow-hidden
+          className={` hover:cursor-pointer w-full py-3 px-4 rounded-lg font-medium text-white transition-all duration-300 relative overflow-hidden
             ${
               isUnstaking
                 ? "bg-red-800/50 cursor-not-allowed"
@@ -158,6 +161,13 @@ const Unstake = () => {
         <div className="mt-4 text-sm text-gray-400">
           <p>You will stop earning rewards on unstaked amount</p>
         </div>
+
+        <SuccessDialog
+          isOpen={showSuccess}
+          onClose={() => setShowSuccess(false)}
+          message="Unstaked successfully!"
+          color="red-500"
+        />
       </div>
     </div>
   );

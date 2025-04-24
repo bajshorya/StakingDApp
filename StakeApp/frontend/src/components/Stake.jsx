@@ -3,12 +3,14 @@ import { ethers } from "ethers";
 import { connectWallet, getContract } from "../utils/web3";
 import stakingAbi from "../abis/StakingContract.json";
 import { CONTRACT_ADDRESSES } from "../config";
+import SuccessDialog from "./SuccessDialog";
 
 const Stake = () => {
   const [amount, setAmount] = useState("");
   const [isStaking, setIsStaking] = useState(false);
   const [error, setError] = useState("");
   const [inputFocused, setInputFocused] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleStake = async () => {
     try {
@@ -36,7 +38,7 @@ const Stake = () => {
         value: ethers.parseEther(amount),
       });
       await tx.wait();
-      alert("Staked successfully!");
+      setShowSuccess(true);
       setAmount("");
     } catch (error) {
       console.error("Staking error:", error);
@@ -121,7 +123,7 @@ const Stake = () => {
         <button
           onClick={handleStake}
           disabled={isStaking}
-          className={`w-full py-3 px-4 rounded-lg font-medium text-white transition-all duration-300 relative overflow-hidden
+          className={` hover:cursor-pointer w-full py-3 px-4 rounded-lg font-medium text-white transition-all duration-300 relative overflow-hidden
             ${
               isStaking
                 ? "bg-purple-800/50 cursor-not-allowed"
@@ -163,6 +165,13 @@ const Stake = () => {
         <div className="mt-4 text-sm text-gray-400">
           <p>Your ETH will be locked in the staking contract</p>
         </div>
+
+        <SuccessDialog
+          isOpen={showSuccess}
+          onClose={() => setShowSuccess(false)}
+          message="Staked successfully!"
+          color="purple-500"
+        />
       </div>
     </div>
   );

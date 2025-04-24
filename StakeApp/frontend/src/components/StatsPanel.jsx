@@ -72,6 +72,9 @@ const StatsPanel = ({ connectedAddress }) => {
         18
       );
 
+      console.log("Debug - userRewards:", userRewardsBarca); // Debug log
+      console.log("Debug - userClaimedRewards:", userClaimedRewardsBarca); // Debug log
+
       const secondsPerYear = 31536000;
       const adjustedRewardRate =
         Number(ethers.formatUnits(rewardRate, 18)) / 1e4;
@@ -80,8 +83,8 @@ const StatsPanel = ({ connectedAddress }) => {
       setStats({
         apy,
         userStake: Number(userStakeEth).toFixed(2),
-        userRewards: Number(userRewardsBarca).toFixed(2),
-        userClaimedRewards: Number(userClaimedRewardsBarca).toFixed(2),
+        userRewards: userRewardsBarca,
+        userClaimedRewards: userClaimedRewardsBarca,
       });
     } catch (err) {
       console.error("Error fetching stats:", err);
@@ -285,7 +288,7 @@ const StatsPanel = ({ connectedAddress }) => {
                   </svg>
                 </div>
               </div>
-              <p className="text-2xl font-bold text-yellow-300 mt-2">
+              <p className="text-2xl font-bold text-yellow-300 mt-2 break-all">
                 {stats.userRewards}
                 <span className="text-xs ml-1 text-yellow-400/70">BARCA</span>
               </p>
@@ -314,7 +317,7 @@ const StatsPanel = ({ connectedAddress }) => {
                   </svg>
                 </div>
               </div>
-              <p className="text-2xl font-bold text-teal-300 mt-2">
+              <p className="text-2xl font-bold text-teal-300 mt-2 break-all">
                 {stats.userClaimedRewards}
                 <span className="text-xs ml-1 text-teal-400/70">BARCA</span>
               </p>
