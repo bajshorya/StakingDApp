@@ -36,9 +36,17 @@ function App() {
   ];
 
   const socialLinks = [
-    { name: "Docs", icon: <FaBook />, url: "#" },
-    { name: "Twitter", icon: <FaTwitter />, url: "#" },
-    { name: "GitHub", icon: <FaGithub />, url: "#" },
+    {
+      name: "Docs",
+      icon: <FaBook />,
+      url: "https://sepolia.etherscan.io/token/0xbaa3e92174336544f61f4088275c3f05a62b7f61?a=0xF4f27Ba9F680AbcA3aa602A732FCF1641888e920",
+    },
+    { name: "Twitter", icon: <FaTwitter />, url: "https://x.com/shorya_baj" },
+    {
+      name: "GitHub",
+      icon: <FaGithub />,
+      url: "https://github.com/bajshorya/StakingDApp.git",
+    },
   ];
 
   return (
@@ -207,6 +215,8 @@ function App() {
               <div className="flex space-x-6">
                 {socialLinks.map((link, index) => (
                   <motion.a
+                    target="_blank"
+                    rel="noopener noreferrer"
                     key={index}
                     href={link.url}
                     whileHover={{ scale: 1.1, rotate: 5 }}

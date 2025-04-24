@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 const SuccessDialog = ({ isOpen, onClose, message, color }) => {
   if (!isOpen) return null;
