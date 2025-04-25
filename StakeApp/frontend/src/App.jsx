@@ -152,7 +152,7 @@ function App() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.6 }}
-            className="text-center py-16 rounded-xl max-w-md mx-auto relative overflow-hidden bg-gradient-to-br from-purple-900/30 to-green-900/30 backdrop-blur-sm border border-gray-800"
+            className="m-10 text-center py-16 rounded-xl max-w-md mx-auto relative overflow-hidden bg-gradient-to-br from-purple-900/30 to-green-900/30 backdrop-blur-sm border border-gray-800"
           >
             <div className="relative z-10">
               <h2 className="text-2xl font-bold text-white mb-4">
