@@ -58,10 +58,9 @@
   }
 }
 #root {
-  @apply min-h-screen; /* Make root take full viewport height */
+  @apply min-h-screen; 
 }
 @layer utilities {
-  /* Existing animations */
   @keyframes gradient {
     0% {
       background-position: 0% 50%;
@@ -184,7 +183,6 @@
     }
   }
 
-  /* New animations */
   @keyframes scale-in {
     0% {
       transform: scale(0.5);
@@ -242,4 +240,3 @@
     background: radial-gradient(circle, transparent 0%, black 70%);
   }
 }
-/* Remove the max-w-7xl and padding from #root as they're already in your App component */

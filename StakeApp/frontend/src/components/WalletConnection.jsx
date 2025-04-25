@@ -78,7 +78,7 @@ const WalletConnection = ({ onAddressChanged }) => {
   }, [onAddressChanged]);
 
   return (
-    <div className="flex items-center">
+    <div className="flex items-center ">
       {account ? (
         <div className="flex items-center space-x-3">
           <div className="flex items-center bg-gray-800/50 backdrop-blur-sm rounded-full px-4 py-2 border border-gray-700/50">
@@ -91,7 +91,7 @@ const WalletConnection = ({ onAddressChanged }) => {
           </div>
           <button
             onClick={disconnectWallet}
-            className="px-3 py-1 text-sm rounded-lg bg-gray-700/50 text-gray-300 hover:bg-gray-600/50 border border-gray-600/50 transition-all duration-200"
+            className="px-3 py-1 text-sm rounded-lg bg-gray-700/50 text-gray-300 hover:bg-gray-600/50 border border-gray-600/50 transition-all duration-200 hover:cursor-pointer"
           >
             Disconnect
           </button>
@@ -100,7 +100,7 @@ const WalletConnection = ({ onAddressChanged }) => {
         <button
           onClick={connectWallet}
           disabled={isConnecting}
-          className={`connect-wallet-btn px-5 py-2 rounded-lg font-medium text-white transition-all duration-300 
+          className={`connect-wallet-btn px-5 py-2 rounded-lg font-medium text-white transition-all duration-300  hover:cursor-pointer
             ${
               isConnecting
                 ? "bg-purple-800/50 cursor-not-allowed"

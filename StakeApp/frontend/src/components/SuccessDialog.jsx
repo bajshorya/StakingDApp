@@ -5,14 +5,12 @@ const SuccessDialog = ({ isOpen, onClose, message, color }) => {
 
   return (
     <div className="fixed inset-0 bg-black/90 bg-gradient-radial from-transparent via-black/50 to-black flex items-center justify-center z-50">
-      <div className="glass-card rounded-xl p-6 shadow-2xl relative overflow-hidden group w-full max-w-md animate-scale-in transform translate-y-[-10%]">
-        {/* Pulsing gradient border effect */}
+      <div className="glass-card rounded-xl p-5 shadow-2xl relative overflow-hidden group w-full max-w-md animate-scale-in transform translate-y-[-10%]">
         <div
           className="absolute inset-0 bg-gradient-to-br from-[color]/40 via-[color]/60 to-[color]/40 animate-pulse rounded-xl -z-10"
           style={{ "--color": color }}
         ></div>
 
-        {/* Floating particles effect */}
         <div className="absolute inset-0 overflow-hidden opacity-40">
           {[...Array(10)].map((_, i) => (
             <div

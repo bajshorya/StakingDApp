@@ -158,7 +158,7 @@ function App() {
               <h2 className="text-2xl font-bold text-white mb-4">
                 Start Staking Today
               </h2>
-              <p className="text-gray-300 mb-6">
+              <p className="text-gray-300 mb-6 ">
                 Connect your wallet to stake ETH and earn BARCA rewards.
               </p>
               <motion.button
@@ -167,7 +167,7 @@ function App() {
                 onClick={() =>
                   document.querySelector(".connect-wallet-btn")?.click()
                 }
-                className="px-6 py-3 bg-gradient-to-r from-purple-600 to-green-600 rounded-lg font-medium text-white hover:opacity-90 transition-all shadow-lg"
+                className="px-6 py-3 bg-gradient-to-r from-purple-600 to-green-600 rounded-lg font-medium text-white hover:opacity-90 transition-all shadow-lg hover:cursor-pointer"
               >
                 Connect Wallet
               </motion.button>

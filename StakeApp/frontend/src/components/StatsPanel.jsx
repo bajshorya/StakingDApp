@@ -106,10 +106,8 @@ const StatsPanel = ({ connectedAddress }) => {
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
-      {/* Animated gradient border effect */}
       <div className="absolute inset-0 bg-gradient-to-r from-blue-600/30 via-purple-500/30 to-blue-600/30 opacity-0 group-hover:opacity-100 animate-gradient rounded-xl -z-10"></div>
 
-      {/* Data visualization particles effect */}
       <div className="absolute inset-0 overflow-hidden opacity-30">
         {[...Array(8)].map((_, i) => (
           <div
@@ -203,7 +201,6 @@ const StatsPanel = ({ connectedAddress }) => {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="relative overflow-hidden group/item bg-gradient-to-br from-blue-900/30 to-blue-800/10 p-4 rounded-lg border border-blue-800/30 transition-all duration-300 hover:shadow-md hover:shadow-blue-700/20">
-              {/* Shine effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-400/5 to-transparent opacity-0 group-hover/item:opacity-100 group-hover/item:translate-x-full transition-all duration-1000 transform -translate-x-full"></div>
 
               <div className="flex justify-between items-center">
@@ -232,7 +229,6 @@ const StatsPanel = ({ connectedAddress }) => {
             </div>
 
             <div className="relative overflow-hidden group/item bg-gradient-to-br from-purple-900/30 to-purple-800/10 p-4 rounded-lg border border-purple-800/30 transition-all duration-300 hover:shadow-md hover:shadow-purple-700/20">
-              {/* Shine effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-400/5 to-transparent opacity-0 group-hover/item:opacity-100 group-hover/item:translate-x-full transition-all duration-1000 transform -translate-x-full"></div>
 
               <div className="flex justify-between items-center">
@@ -266,7 +262,6 @@ const StatsPanel = ({ connectedAddress }) => {
             </div>
 
             <div className="relative overflow-hidden group/item bg-gradient-to-br from-yellow-900/30 to-yellow-800/10 p-4 rounded-lg border border-yellow-800/30 transition-all duration-300 hover:shadow-md hover:shadow-yellow-700/20">
-              {/* Shine effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-yellow-400/5 to-transparent opacity-0 group-hover/item:opacity-100 group-hover/item:translate-x-full transition-all duration-1000 transform -translate-x-full"></div>
 
               <div className="flex justify-between items-center">
@@ -295,7 +290,6 @@ const StatsPanel = ({ connectedAddress }) => {
             </div>
 
             <div className="relative overflow-hidden group/item bg-gradient-to-br from-teal-900/30 to-teal-800/10 p-4 rounded-lg border border-teal-800/30 transition-all duration-300 hover:shadow-md hover:shadow-teal-700/20">
-              {/* Shine effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-teal-400/5 to-transparent opacity-0 group-hover/item:opacity-100 group-hover/item:translate-x-full transition-all duration-1000 transform -translate-x-full"></div>
 
               <div className="flex justify-between items-center">

@@ -48,10 +48,8 @@ const Unstake = () => {
 
   return (
     <div className="glass-card rounded-xl p-6 shadow-lg hover:shadow-red-500/30 transition-all duration-500 relative overflow-hidden group">
-      {/* Animated gradient border effect */}
       <div className="absolute inset-0 bg-gradient-to-r from-red-600/30 via-yellow-500/30 to-red-600/30 opacity-0 group-hover:opacity-100 animate-gradient rounded-xl -z-10"></div>
 
-      {/* Floating particles effect */}
       <div className="absolute inset-0 overflow-hidden opacity-30">
         {[...Array(5)].map((_, i) => (
           <div
@@ -126,7 +124,6 @@ const Unstake = () => {
                 : "bg-gradient-to-r from-red-600 to-yellow-600 hover:from-red-700 hover:to-yellow-700 shadow-md hover:shadow-lg hover:shadow-red-500/50"
             }`}
         >
-          {/* Button shine effect */}
           <span className="absolute top-0 left-0 w-full h-full bg-white/20 transform -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
 
           {isUnstaking ? (
